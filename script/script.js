@@ -1,6 +1,9 @@
+
+
 $(document).ready(function() {
       $('.errorEmail').hide();
 	  $('.invalid_email').hide();
+	  $(".errorAdmin").hide();
 $(".pageCover").hide();
 $(".adminPage").show();
 
@@ -30,6 +33,7 @@ $(".openbtn2, #mySidepanel2 a").click(function(){
 	  $(this).removeClass("errOutline");
 	  var attr = $(this).attr('data-error');
 	  $("."+attr).hide();
+	  $(".errorAdmin").hide();
 	  });
 	  
 	  
@@ -68,29 +72,46 @@ $(".openbtn2, #mySidepanel2 a").click(function(){
           return false;
         }
         else if(IsEmail(email)==false){
-          $('.invalid_email').show();
+          $('.invalid_email').show();			
           return false;
         }
 		
+		
   });
  });
- 
+ var adminValidate = true;
  function IsEmail(email) {
   var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   if(!regex.test(email)) {
   $(".emailLogin").addClass("errOutline");
     return false;
   }else{
-	  
+	  var emailVal = $("#emailLogin").val();
+	  var passwordval = $("#passwordLogin").val();
+	  console.log(emailVal);
+	  console.log(passwordval);
+	  for (var i = 0; i < obj.length; i++){
+  if ((obj[i].EMail == emailVal)&&(obj[i].Password == passwordval)){
+	  var correctVar  = $("#submitMemLogin").parents(".pageCover").attr("data-next");
+				 $(".pageCover").hide();
+				 $("."+correctVar).show();
+				 $(".adminMenu").show();$(".memMenu").hide();
+				 return true; 
+  }
+  else{
+	  $(".errorAdmin").show();
+  }
+}
+	/*  
 	  var adminLoginform = JSON.stringify($("#loginform").serializeArray());
 	  console.log(adminLoginform);
 	  $.ajax({
 		  type: "POST",
-		  url: "https://master.d3s6kuiapw4970.amplifyapp.com/",
+		  url: "",
 		  data: adminLoginform,
 		  success: function(msg){
 			  if(msg.status=="done"){
-                 var correctVar  = $("#submitMemLogin").parents(".pageCover").	attr("data-next");
+                 var correctVar  = $("#submitMemLogin").parents(".pageCover").attr("data-next");
 				 $(".pageCover").hide();
 				 $("."+correctVar).show();
 				 $(".adminMenu").show();$(".memMenu").hide();
@@ -104,7 +125,7 @@ $(".openbtn2, #mySidepanel2 a").click(function(){
 		  contentType : "application/json"
 		});
 	  
-  
+  */
   
   }
 }

@@ -218,7 +218,7 @@ position: absolute;
     text-decoration: none;
     margin: 0px 0 14px 0;
 }
-.userSetupCover a:hover{background:#00c4ff}
+.userSetupCover a:hover{background:#00c4ff;text-decoration:none;}
 .displayJson{
 	    width: 800px;
     height: 400px;
@@ -249,3 +249,7 @@ position: absolute;
 .displayJson .jsoncover{height: 360px;
     overflow-y: scroll;
     position: relative;}
+	#mySidepanel{height:222px;}
+	#dashboardform table{width:580px;}
+	#dashboardform .tabBtn{    margin: 0 auto;
+    float: none;}

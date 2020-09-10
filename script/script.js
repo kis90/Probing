@@ -39,21 +39,7 @@ $(".openbtn2, #mySidepanel2 a").click(function(){
 	  });
 	  
 	  
-      $('#submitMemLogin').click(function(){
-        
-        var email = $('.emailLogin').val();
-
-        
-        if(email== ''){
-          $('.errorEmail').show();
-          return false;
-        }
-        else if(IsEmail(email)==false){
-          $('.invalid_email').show();
-          return false;
-        }
-		
-  });
+      
   $(".jsonClose").click(function(){
 	  $(".displayJson").hide();
   });
@@ -72,18 +58,53 @@ $(".openbtn2, #mySidepanel2 a").click(function(){
 		 $(".displayJson .box5").append(formData5);
  
 	  });
+	  $('#submitMemLogin').click(function(){
+        
+        var email = $('.emailLogin').val();
+
+        
+        if(email== ''){
+          $('.errorEmail').show();
+          return false;
+        }
+        else if(IsEmail(email)==false){
+          $('.invalid_email').show();
+          return false;
+        }
+		
+  });
  });
+ 
  function IsEmail(email) {
   var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   if(!regex.test(email)) {
   $(".emailLogin").addClass("errOutline");
     return false;
   }else{
+	  
+	  var adminLoginform = JSON.stringify($("#loginform").serializeArray());
+	  console.log(adminLoginform);
+	  $.ajax({
+		  type: "POST",
+		  url: "https://master.d3s6kuiapw4970.amplifyapp.com/",
+		  data: adminLoginform,
+		  success: function(msg){
+			  if(msg.status=="done"){
+                 var correctVar  = $("#submitMemLogin").parents(".pageCover").	attr("data-next");
+				 $(".pageCover").hide();
+				 $("."+correctVar).show();
+				 $(".adminMenu").show();$(".memMenu").hide();
+				 return true;                     
+                  }else{
+					  $(".errRespose").html("username or password was incorrect");
+				  }
+			  
+		  },
+		  dataType: "json",
+		  contentType : "application/json"
+		});
+	  
   
-  var correctVar  = $("#submitMemLogin").parents(".pageCover").attr("data-next");
-  $(".pageCover").hide();
-  $("."+correctVar).show();
-  $(".adminMenu").show();$(".memMenu").hide();
-    return true;
+  
   }
 }

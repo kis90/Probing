@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Enter your database connection details below
 app.config['MYSQL_HOST'] = 'ip-10-0-132-135'
-app.config['MYSQL_USER'] = 'ubuntu'
+app.config['MYSQL_USER'] = 'root@localhost'
 app.config['MYSQL_PASSWORD'] = 'Capgemini@2020'
 app.config['MYSQL_DB'] = 'probedb'
 

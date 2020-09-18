@@ -5,7 +5,7 @@ $(document).ready(function() {
 	  $('.invalid_email').hide();
 	  $(".errorAdmin").hide();
 $(".pageCover").hide();
-$(".adminPage").show();
+$(".memLoginPage").show();
 
 
 $(".clkBtn").click(function(){
